@@ -1,0 +1,75 @@
+{
+ "modelo": "ResNet-18 ajustada (ImageNet -> FF++ c23), saida calibrada por temperature scaling",
+ "model_id": "resnet18_ft_v1_best",
+ "temperatura": 1.158264246447453,
+ "epoca_checkpoint": 5,
+ "limiar": 0.5,
+ "teste": {
+  "frames": 2800,
+  "videos": 280,
+  "frac_fake": 0.5
+ },
+ "frame": {
+  "acc": 0.9675,
+  "prec": 0.9605911330049262,
+  "rec": 0.975,
+  "f1": 0.967741935483871,
+  "auc": 0.9929918367346939,
+  "brier": 0.026920825242996216,
+  "tn": 1344.0,
+  "fp": 56.0,
+  "fn": 35.0,
+  "tp": 1365.0,
+  "ece": 0.01605532307709966,
+  "auc_ic95": [
+   0.988,
+   0.997
+  ],
+  "acc_ic95": [
+   0.953,
+   0.98
+  ],
+  "f1_ic95": [
+   0.953,
+   0.98
+  ]
+ },
+ "video": {
+  "acc": 0.9857142857142858,
+  "prec": 0.9857142857142858,
+  "rec": 0.9857142857142858,
+  "f1": 0.9857142857142858,
+  "auc": 0.998673469387755,
+  "brier": 0.014721497893333435,
+  "tn": 138.0,
+  "fp": 2.0,
+  "fn": 2.0,
+  "tp": 138.0,
+  "auc_ic95": [
+   0.996,
+   1.0
+  ],
+  "acc_ic95": [
+   0.971,
+   0.996
+  ],
+  "f1_ic95": [
+   0.971,
+   0.996
+  ]
+ },
+ "controle_celeba_real_teste": {
+  "n": 984,
+  "frac_pred_fake": 0.0975609756097561,
+  "mean_p": 0.14278267323970795,
+  "median_p": 0.0268716998398304
+ },
+ "treino": {
+  "arch": "resnet18",
+  "epocas": 6,
+  "frames_por_video_por_epoca": 5,
+  "lr": 0.0003,
+  "bs": 32,
+  "seed": 42
+ }
+}
