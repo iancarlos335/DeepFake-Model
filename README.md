@@ -6,7 +6,15 @@ O sistema recebe uma imagem de rosto e devolve a probabilidade de ela ser *fake*
 
 Escopo: imagem estática de rosto; fakes de *face swap* do FaceForensics++ (FaceSwap, compressão c23) e rostos reais do próprio FF++. Não cobre vídeo, áudio nem voz clonada.
 
-## Estado atual (Marco 2, 08/11/2026)
+## Relatório e apresentação
+
+- [`docs/RELATORIO_PROJETO.md`](docs/RELATORIO_PROJETO.md): o que foi feito, resultados, desvios do plano, limitações e como reproduzir.
+- [`docs/Apresentacao_Marco_Final.pptx`](docs/Apresentacao_Marco_Final.pptx): slides do Marco Final, com o roteiro de fala de cada integrante nas notas.
+- [`docs/divisao_tarefas_marco2.md`](docs/divisao_tarefas_marco2.md): divisão de tarefas e dependências do Marco 2.
+
+## Estado no Marco 2 (08/11/2026)
+
+O agente completo e a aplicação (Marco Final) estão descritos na seção "Aplicação de demonstração" mais abaixo e em `docs/RELATORIO_PROJETO.md`; a tabela abaixo é o retrato do Marco 2.
 
 | Componente | Estado |
 |---|---|
@@ -70,6 +78,27 @@ python ml/final_model_metrics.py            # métricas exatas do teste + figura
 ```
 
 Sementes fixas (42) e divisões oficiais do FF++ em todos os scripts.
+
+## Aplicação de demonstração (Marco Final)
+
+```bash
+pip install -r agent/requirements.txt          # facenet-pytorch com --no-deps (veja o arquivo)
+streamlit run agent/app.py                      # abre no navegador
+```
+
+Anexe imagens (png/jpg) ou vídeos (mp4) ou escolha exemplos de `agent/demo_samples` (gerados por `agent/make_demo_samples.py`, não versionados; o gabarito fica em `demo_samples/gabarito.csv`). A página mostra as 9 etapas do processamento (detecção, recorte, CNN com Grad-CAM, evidências, discretização, Rede Bayesiana, explicação em log-odds, decisão por custo esperado) e a decisão final: fake, real ou inconclusivo. Os custos C_FP, C_FN e C_INC são ajustáveis na barra lateral. Requer `derived/cnn/resnet18_ft_v1/best.pt` (não versionado).
+
+| Arquivo | Função |
+|---|---|
+| `agent/core.py` | pipeline do agente (MTCNN, ResNet-18, evidências, Rede Bayesiana em pgmpy, decisão) |
+| `agent/app.py` | interface Streamlit |
+| `agent/build_model.py` | ajusta as CPTs na validação e grava `agent/model_params.json` |
+| `agent/verify.py` | confere o pipeline contra o manifest (recortes idênticos; evidências e p_cnn_cal iguais) |
+| `agent/evaluate.py c23 \| c40` | ablação, estrutura Hill-Climbing/BIC, evidência ausente, custos, proxy de c40 |
+| `agent/make_c40_proxy.py` | recomprime os vídeos de validação e teste a H.264 CRF 40 (proxy do c40; não é o c40 oficial) |
+| `agent/ethics_celeba.py` | falsos positivos por grupo do CelebA (condição bruta e condição igualada) |
+
+Resultados em `derived/agent/`: `ablacao_c23.csv`, `robustez_c40proxy.csv`, `fpr_por_grupo.csv`, `leave_one_out.csv`, `evidencia_ausente.csv`, `sensibilidade_custos.csv`, `risco_cobertura.csv`, `estruturas.json`.
 
 ## Contratos de interface entre trilhas
 
