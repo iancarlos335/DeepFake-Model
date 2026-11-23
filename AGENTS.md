@@ -27,7 +27,7 @@ Detector de deepfake facial: classificador de pixels (ML) + Rede Bayesiana (IA c
 | `eda/` | Marco 1: extração, EDA, `baselines.py` | histórico; só corrija bugs |
 | `ml/` | treino, calibração, tabela comparativa, métricas finais | P1 |
 | `evidences/` (a criar) | BiSeNet, textura/ruído, geometria, compressão, discretização | P2 |
-| `agent/` (a criar) | Rede Bayesiana (pgmpy), explicação, decisão, demo | P3 |
+| `agent/` | pipeline do agente, Rede Bayesiana (pgmpy), explicação, decisão, app Streamlit, avaliação final | P3 |
 | `derived/agent/` | **contratos de interface** entre trilhas | quem produz o arquivo |
 | `docs/` | planejamento, tarefas, dependências | todos |
 

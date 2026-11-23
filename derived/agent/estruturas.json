@@ -1,0 +1,24 @@
+{
+ "edges_hill_climbing": [
+  [
+   "CNN",
+   "Fake"
+  ],
+  [
+   "DET",
+   "GEOM"
+  ],
+  [
+   "Fake",
+   "BLOCK"
+  ],
+  [
+   "Fake",
+   "HF"
+  ]
+ ],
+ "bic_val": {
+  "Naive Bayes (Fake \u2192 todos)": -15126.182795526813,
+  "Hill-Climbing/BIC": -15028.460064996312
+ }
+}

@@ -186,3 +186,6 @@ tmp_ff/
 *.pt
 *.pth
 Marco*_backup_*.docx
+
+# Demonstração: amostras do FF++/CelebA (termos de uso proíbem redistribuir)
+agent/demo_samples/

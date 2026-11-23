@@ -1,0 +1,13 @@
+# Ambiente testado: Python 3.11
+torch>=2.2
+torchvision>=0.17
+facenet-pytorch>=2.6.0   # instale com --no-deps para não fixar versões de torch/numpy
+pgmpy>=1.1
+streamlit>=1.50
+opencv-python-headless
+pandas
+pyarrow
+scikit-learn
+matplotlib
+Pillow
+imageio-ffmpeg           # só para agent/make_c40_proxy.py e agent/ethics_celeba.py

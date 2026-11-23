@@ -32,7 +32,7 @@ Os três primeiros modelos reproduzem exatamente os números do baseline do Marc
 
 ### 3.3 Métricas do modelo final no conjunto de teste
 
-Modelo: `resnet18_ft_v1_best`, época 5 (AUC de validação 0.9972), saída calibrada, limiar 0,5. Teste do FF++ c23.
+Modelo: `resnet18_ft_v1_best`, época 6 (AUC de validação 0.9972), saída calibrada, limiar 0,5. Teste do FF++ c23.
 
 | Nível | Acurácia | Precisão | Recall | F1 | AUC-ROC | Brier |
 |---|---|---|---|---|---|---|
@@ -47,5 +47,5 @@ Modelo: `resnet18_ft_v1_best`, época 5 (AUC de validação 0.9972), saída cali
 
 1. O teste é FF++ c23 com FaceSwap, o mesmo método e a mesma compressão do treino. Isso mede o desempenho em distribuição. Robustez em c40 e generalização no Celeb-DF ainda não foram medidas (tarefas F1 e F2), e o resultado no Celeb-DF pode ser bem pior, como o próprio artigo do Celeb-DF mostra para outros detectores.
 2. Verificação de atalho de origem: aplicada a 984 rostos reais do CelebA (teste), a CNN classificou 9.8% como fake. Não é zero, mas está muito longe do controle do Marco 1, em que a regressão treinada com CelebA como real chamava 94% dos originais do FF++ de fake. O CelebA tem compressão e resolução diferentes do FF++, então essa taxa também mede sensibilidade à compressão, e não só viés.
-3. A perda de validação deixou de cair depois da época 3 enquanto a de treino continuou caindo (início de sobreajuste). O checkpoint escolhido foi o de melhor AUC de validação, e o teste não foi usado em nenhuma escolha. Foi uma única execução (semente 42), sem estimativa de variância entre sementes.
+3. Depois da época 3 a perda de validação oscilou entre 0,068 e 0,095 enquanto a de treino continuou caindo (de 0,106 para 0,026), sinal de início de sobreajuste. O checkpoint escolhido foi o de melhor AUC de validação, e o teste não foi usado em nenhuma escolha. Foi uma única execução (semente 42), sem estimativa de variância entre sementes.
 4. O modelo final do sistema completo será a Rede Bayesiana que combina esta CNN com as evidências; as métricas dela entram nas tarefas I1 e F3. Esta seção trata do componente de ML.
